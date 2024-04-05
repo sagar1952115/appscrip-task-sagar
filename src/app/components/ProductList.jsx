@@ -1,16 +1,33 @@
-"use client";
-import React, { Suspense } from "react";
+// "use server";
+// import React, { Suspense, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import axios from "axios";
+import Products from "./Products";
 
-const ProductList = ({ products }) => {
+const getProducts = async () => {
+  const res = fetch("https://fakestoreapi.com/products");
+  return (await res).json();
+};
+
+const ProductList = async ({ products }) => {
+  // const [product, setProduct] = useState([]);
+  // useEffect(() => {
+  //   const fetchProduct = async () => {
+  //     const response = await axios.get("https://fakestoreapi.com/products");
+  //     // const product = response.json();
+  //     console.log(response.data);
+  //     setProduct(response.data);
+  //   };
+  //   fetchProduct();
+  // }, []);
+  const product = await getProducts();
+
   return (
-    <Suspense fallback={<>Loading</>}>
-      <div className="flex flex-wrap items-center justify-center gap-7">
-        {products.map((product) => {
-          return <ProductCard key={product.id} data={product} />;
-        })}
-      </div>
-    </Suspense>
+    // <Suspense fallback={<>Loading</>}>
+    <>
+      <Products products={product} />
+    </>
+    // </Suspense>
   );
 };
 

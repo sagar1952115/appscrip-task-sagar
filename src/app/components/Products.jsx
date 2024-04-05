@@ -1,26 +1,29 @@
-import Header from "./components/Header";
+"use client";
+import React, { useState } from "react";
+import ProductList from "./ProductList";
+import FilterBar from "./FilterBar";
+import SortBy from "./SortBy";
+import Image from "next/image";
+import ProductCard from "./ProductCard";
 
-// import ProductList from "./components/ProductList";
-
-import Footer from "./components/Footer";
-
-// import Products from "./components/Products";
-import ProductList from "./components/ProductList";
-
-export default function Home() {
-  // useEffect(() => {
-  //   const fetchProduct = async () => {
-  //     const response = await axios.get("https://fakestoreapi.com/products");
-  //     // const product = response.json();
-  //     console.log(response.data);
-  //     setProduct(response.data);
-  //   };
-  //   fetchProduct();
-  // }, []);
+const Products = ({ products }) => {
+  const [showFilter, setShowFilter] = useState(false);
+  const [showMobileFilter, setShowMobileFilter] = useState(false);
+  const [toggleRecommendedDropdown, setToggleRecommendedDropdown] =
+    useState(false);
+  // const [product, setProduct] = useState([]);
+  const handleShowFilter = () => {
+    setShowFilter(!showFilter);
+  };
+  const handleShowMobileFilter = () => {
+    setShowMobileFilter(!showMobileFilter);
+  };
+  const handleRecommendedDropdown = () => {
+    setToggleRecommendedDropdown(!toggleRecommendedDropdown);
+  };
   return (
     <>
-      <Header />
-      {/* <div className="max-w-[1800px] m-auto lg:p-5">
+      <div className="max-w-[1800px] m-auto lg:p-5">
         <div className="lg:flex justify-between py-5 border-y hidden">
           {" "}
           <div className="flex gap-5">
@@ -90,16 +93,17 @@ export default function Home() {
             <FilterBar />
           </div>
           <div className="w-full">
-            
-            <ProductList />
+            {/* {product.length > 0 && <ProductList products={product} />} */}
+            {/* <ProductList /> */}
+            <div className="flex flex-wrap items-center justify-center gap-7">
+              {products?.map((product) => {
+                return <ProductCard key={product.id} data={product} />;
+              })}
+            </div>
           </div>
         </div>
-      </div> */}
-      <ProductList />
-
-      <Footer />
-
-      {/* <div
+      </div>
+      <div
         className={`lg:hidden fixed bottom-0 ${
           showMobileFilter ? "w-full" : "w-0"
         } top-0 transform transition-all duration-500 
@@ -119,7 +123,9 @@ export default function Home() {
             Apply
           </button>
         </div>
-      </div> */}
+      </div>
     </>
   );
-}
+};
+
+export default Products;
