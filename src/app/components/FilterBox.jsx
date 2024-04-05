@@ -10,7 +10,7 @@ const FilterBox = ({ data }) => {
     <div className="flex flex-col border-y  gap-2 py-3">
       <div className="flex justify-between  items-center">
         <div className="font-semibold uppercase">{data.name}</div>
-        <div onClick={handleShowDropdown}>
+        <div className="cursor-pointer" onClick={handleShowDropdown}>
           <Image
             width={15}
             height={15}

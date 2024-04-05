@@ -11,7 +11,6 @@ const Products = ({ products }) => {
   const [showMobileFilter, setShowMobileFilter] = useState(false);
   const [toggleRecommendedDropdown, setToggleRecommendedDropdown] =
     useState(false);
-  // const [product, setProduct] = useState([]);
   const handleShowFilter = () => {
     setShowFilter(!showFilter);
   };
@@ -23,14 +22,14 @@ const Products = ({ products }) => {
   };
   return (
     <>
-      <div className="max-w-[1800px] m-auto lg:p-5">
+      <div className="max-w-[1800px] z-0 m-auto lg:p-5">
         <div className="lg:flex justify-between py-5 border-y hidden">
           {" "}
           <div className="flex gap-5">
             <div className="font-semibold">3425 ITEMS</div>
             <div
               onClick={handleShowFilter}
-              className="flex text-slate-400 underline gap-1"
+              className="flex text-slate-400 underline gap-1 cursor-pointer"
             >
               <Image
                 width={15}
@@ -44,7 +43,7 @@ const Products = ({ products }) => {
           </div>
           <div
             onClick={handleRecommendedDropdown}
-            className="flex relative items-center font-semibold gap-1"
+            className="flex relative -z-20 items-center font-semibold gap-1 cursor-pointer"
           >
             RECOMMENDED
             <Image
@@ -52,7 +51,7 @@ const Products = ({ products }) => {
               height={15}
               className={`font-light ${
                 toggleRecommendedDropdown ? "rotate-180" : ""
-              } transform duration-500`}
+              } transform duration-500 cursor-pointer`}
               src="/img/icons/arrow.svg"
               alt="Down arrow"
             />
@@ -61,14 +60,14 @@ const Products = ({ products }) => {
         </div>
         <div className="lg:hidden flex justify-between  border-y my-5">
           <div
-            className="w-full p-3 border font-semibold text-center border-r"
+            className="w-full p-3 border font-semibold text-center border-r cursor-pointer"
             onClick={handleShowMobileFilter}
           >
             FILTER
           </div>
           <div
             onClick={handleRecommendedDropdown}
-            className="flex relative p-3 justify-center w-full transform duration-500 items-center font-semibold gap-1"
+            className="flex relative -z-20 p-3 cursor-pointer justify-center w-full transform duration-500 items-center font-semibold gap-1"
           >
             RECOMMENDED
             <Image
@@ -115,7 +114,7 @@ const Products = ({ products }) => {
         <div className="flex gap-3  p-2">
           <button
             onClick={handleShowMobileFilter}
-            className="border p-2 w-full font-bold text-white rounded-md bg-red-600"
+            className="border p-2 w-full font-bold text-white rounded-md cursor-pointer bg-red-600"
           >
             Close
           </button>
