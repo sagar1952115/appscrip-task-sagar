@@ -6,8 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Appscrip - One stop e-commerce solution",
-  description:
-    "Discover the future of e-commerce with Appscrip's comprehensive solutions. Explore AIFI Coin, DeFi, cryptocurrency, blockchain, metaverse, meme tokens, SAFT, private sale, investing, utility tokens, NFT marketplace, mobile wallet, platform and API, and community involvement.",
+  description: "Discover the future of e-commerce.",
   keywords: [
     "e-commerce",
     "online shopping",

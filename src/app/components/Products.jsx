@@ -1,12 +1,13 @@
 "use client";
-import React, { useState } from "react";
-import ProductList from "./ProductList";
+import React, { useEffect, useState } from "react";
+import ProductList, { getProducts } from "./ProductList";
 import FilterBar from "./FilterBar";
 import SortBy from "./SortBy";
 import Image from "next/image";
 import ProductCard from "./ProductCard";
 
 const Products = ({ products }) => {
+  const [productsArray, setProductsArray] = useState(products);
   const [showFilter, setShowFilter] = useState(false);
   const [showMobileFilter, setShowMobileFilter] = useState(false);
   const [toggleRecommendedDropdown, setToggleRecommendedDropdown] =
@@ -20,9 +21,18 @@ const Products = ({ products }) => {
   const handleRecommendedDropdown = () => {
     setToggleRecommendedDropdown(!toggleRecommendedDropdown);
   };
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const product = await getProducts();
+      console.log(product, productsArray);
+      const newProductArray = productsArray.concat(product);
+      setProductsArray(newProductArray);
+    };
+    fetchProduct();
+  }, []);
   return (
     <>
-      <div className="max-w-[1800px] z-0 m-auto lg:p-5">
+      <div className="max-w-[1800px] -z-30 m-auto  lg:p-5">
         <div className="lg:flex justify-between py-5 border-y hidden">
           {" "}
           <div className="flex gap-5">
@@ -34,7 +44,7 @@ const Products = ({ products }) => {
               <Image
                 width={15}
                 height={15}
-                className="font-light transform rotate-[270deg]"
+                className="font-light transform rotate-[270deg] -z-20"
                 src="/img/icons/arrow.svg"
                 alt="Down arrow"
               />
@@ -43,18 +53,21 @@ const Products = ({ products }) => {
           </div>
           <div
             onClick={handleRecommendedDropdown}
-            className="flex relative -z-20 items-center font-semibold gap-1 cursor-pointer"
+            className="flex relative  font-semibold  cursor-pointer"
           >
-            RECOMMENDED
-            <Image
-              width={15}
-              height={15}
-              className={`font-light ${
-                toggleRecommendedDropdown ? "rotate-180" : ""
-              } transform duration-500 cursor-pointer`}
-              src="/img/icons/arrow.svg"
-              alt="Down arrow"
-            />
+            <div className="-z-40 flex gap-1 items-center">
+              {" "}
+              RECOMMENDED
+              <Image
+                width={15}
+                height={15}
+                className={`font-light ${
+                  toggleRecommendedDropdown ? "rotate-180" : ""
+                } transform duration-500 cursor-pointer`}
+                src="/img/icons/arrow.svg"
+                alt="Down arrow"
+              />
+            </div>
             <SortBy show={toggleRecommendedDropdown} />
           </div>
         </div>
@@ -67,18 +80,20 @@ const Products = ({ products }) => {
           </div>
           <div
             onClick={handleRecommendedDropdown}
-            className="flex relative -z-20 p-3 cursor-pointer justify-center w-full transform duration-500 items-center font-semibold gap-1"
+            className="flex p-3 relative cursor-pointer justify-center w-full  items-center font-semibold gap-1"
           >
-            RECOMMENDED
-            <Image
-              width={15}
-              height={15}
-              className={`font-light ${
-                toggleRecommendedDropdown ? " rotate-180 " : ""
-              } transform duration-500`}
-              src="/img/icons/arrow.svg"
-              alt="Down arrow"
-            />
+            <div className="-z-40 flex items-center gap-1">
+              RECOMMENDED
+              <Image
+                width={15}
+                height={15}
+                className={`font-light ${
+                  toggleRecommendedDropdown ? " rotate-180 " : ""
+                } transform duration-500`}
+                src="/img/icons/arrow.svg"
+                alt="Down arrow"
+              />
+            </div>
             <SortBy show={toggleRecommendedDropdown} />
           </div>
         </div>
@@ -92,11 +107,9 @@ const Products = ({ products }) => {
             <FilterBar />
           </div>
           <div className="w-full">
-            {/* {product.length > 0 && <ProductList products={product} />} */}
-            {/* <ProductList /> */}
             <div className="flex flex-wrap items-center justify-center gap-7">
-              {products?.map((product) => {
-                return <ProductCard key={product.id} data={product} />;
+              {productsArray?.map((product, i) => {
+                return <ProductCard key={i} data={product} />;
               })}
             </div>
           </div>

@@ -11,8 +11,8 @@ const Header = () => {
   return (
     <>
       {" "}
-      <div className="sticky top-0  bg-white z-100 flex  flex-col w-full items-center gap-4 border-b-2">
-        <div className="  flex w-full bg-white justify-between items-center  lg:px-10 p-5">
+      <div className="sticky  top-0  bg-white flex z-100 flex-col w-full items-center gap-4 border-b-2">
+        <div className="  flex w-full bg-white  justify-between items-center  lg:px-10 p-5">
           <div className="w-1/4  flex items-center lg:justify-start  gap-5">
             <Image
               onClick={handleShowNav}
