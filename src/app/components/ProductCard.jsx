@@ -7,8 +7,8 @@ const ProductCard = ({ data }) => {
       <div className="gap-4  w-[300px] h-[400px] flex flex-col items-center">
         <div className="h-full overflow-hidden flex items-center ">
           <Image
-            width={250}
-            height={100}
+            width={200}
+            height={200}
             alt="Image"
             className=""
             src={data.image}

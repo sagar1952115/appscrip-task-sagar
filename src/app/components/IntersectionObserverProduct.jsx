@@ -25,7 +25,7 @@ const IntersectionObserverProduct = ({ initialProducts }) => {
           return <ProductCard key={i} data={product} />;
         })}
       </div>
-      <div ref={ref} className="m-auto w-max">
+      <div ref={ref} className="m-auto -z-20 w-max">
         <Spinner />
       </div>
     </div>
