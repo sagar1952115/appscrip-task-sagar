@@ -5,9 +5,10 @@ import FilterBar from "./FilterBar";
 import SortBy from "./SortBy";
 import Image from "next/image";
 import ProductCard from "./ProductCard";
+import IntersectionObserverProduct from "./IntersectionObserverProduct";
 
 const Products = ({ products }) => {
-  const [productsArray, setProductsArray] = useState(products);
+  // const [productsArray, setProductsArray] = useState(products);
   const [showFilter, setShowFilter] = useState(false);
   const [showMobileFilter, setShowMobileFilter] = useState(false);
   const [toggleRecommendedDropdown, setToggleRecommendedDropdown] =
@@ -21,15 +22,6 @@ const Products = ({ products }) => {
   const handleRecommendedDropdown = () => {
     setToggleRecommendedDropdown(!toggleRecommendedDropdown);
   };
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const product = await getProducts();
-      console.log(product, productsArray);
-      const newProductArray = productsArray.concat(product);
-      setProductsArray(newProductArray);
-    };
-    fetchProduct();
-  }, []);
   return (
     <>
       <div className="max-w-[1800px] -z-30 m-auto  lg:p-5">
@@ -106,13 +98,7 @@ const Products = ({ products }) => {
             {" "}
             <FilterBar />
           </div>
-          <div className="w-full">
-            <div className="flex flex-wrap items-center justify-center gap-7">
-              {productsArray?.map((product, i) => {
-                return <ProductCard key={i} data={product} />;
-              })}
-            </div>
-          </div>
+          <IntersectionObserverProduct initialProducts={products} />
         </div>
       </div>
       <div
